@@ -10,6 +10,19 @@
     </nav>
 </div>
 <div class="row">
+    <form action="/messages/create" method="post">
+        <div class="form-group @if($errors->has('message')) has-danger @endif">
+            {{csrf_field()}}
+            <input type="text" name="message" class="form-control" placeholder="Que estas pensando?">
+            @if($errors->has('message'))
+                @foreach($errors->get('message') as $error)
+                    <div class="form-control-feedback">{{$error}}</div>
+                @endforeach
+            @endif
+        </div>
+    </form>
+</div>
+<div class="row">
     @forelse($messages as $message)
         <div class="col-6">
             <img class="img-thumbnail" src="{{$message->image}}">
