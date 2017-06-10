@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
     <hi>{{$user->name}}</hi>
     <div>
     <a href="/{{$user->username}}/follows" class="btn btn-link">Sigue a <span class="badge-default">{{$user->follows->count()}}</span></a>
@@ -8,6 +9,13 @@
     </div>
 
     @if(Auth::check())
+        @if(Gate::allows('dms', $user))
+            <form action="/{{$user->username}}/dms" method="post">
+                {{csrf_field()}}
+                <input type="text" name="message" class="form-control">
+                <button type="submit" class="btn btn-success">Enviar DM</button>
+            </form>
+        @endif
         @if(Auth::user()->isFollowing($user))
             <form action="/{{$user->username}}/unfollow" method="post">
                 {{csrf_field()}}
@@ -22,7 +30,7 @@
                 @if(session('success'))
                     <span class="text-success">{{session('success')}}</span>
                 @endif
-                <button class="btn btn-primary">Follow</button>
+                <button class="btn btn-primary">Seguir</button>
             </form>
         @endif
     @endif

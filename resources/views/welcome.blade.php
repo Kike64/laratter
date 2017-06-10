@@ -10,7 +10,7 @@
     </nav>
 </div>
 <div class="row">
-    <form action="/messages/create" method="post">
+    <form action="/messages/create" method="post" enctype="multipart/form-data">
         <div class="form-group @if($errors->has('message')) has-danger @endif">
             {{csrf_field()}}
             <input type="text" name="message" class="form-control" placeholder="Que estas pensando?">
@@ -19,6 +19,7 @@
                     <div class="form-control-feedback">{{$error}}</div>
                 @endforeach
             @endif
+            <input type="file" class="form-control-file" name="image" ></input>
         </div>
     </form>
 </div>
