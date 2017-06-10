@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Database\Console\Migrations\ResetCommand;
 use Laravel\Scout\Searchable;
 use Illuminate\Database\Eloquent\Model;
 
@@ -27,5 +28,9 @@ class Message extends Model
         $this->load('user');
 
         return $this->toArray();
+    }
+
+    public function responses(){
+        return $this->hasMany(Response::class)->latest();
     }
 }

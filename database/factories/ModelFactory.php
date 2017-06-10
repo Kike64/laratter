@@ -30,6 +30,14 @@ $factory->define(App\Message::class, function (Faker\Generator $faker){
         'content'=>$faker->realText(random_int(20,160)),
         'image'=>$faker->imageUrl(600,338),
         'created_at'=>$faker->dateTimeThisDecade,
-        'updated_at'=>$faker->dateTimeThisDecade
+        'updated_at'=>$faker->dateTimeThisDecade,
+    ];
+});
+
+$factory->define(App\Response::class, function (Faker\Generator $faker){
+    return [
+        'message' => $faker->words(3, true),
+        'created_at'=>$faker->dateTimeThisDecade,
+        'updated_at'=>$faker->dateTimeThisDecade,
     ];
 });

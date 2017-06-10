@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSocialProfilesTable extends Migration
+class CreateResponsesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,14 @@ class CreateSocialProfilesTable extends Migration
      */
     public function up()
     {
-        Schema::create('social_profiles_table', function (Blueprint $table) {
+        Schema::create('responses', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('message_id')->unsigned();
+            $table->integer('user_id')->unsigned();
+            $table->string('message');
             $table->timestamps();
 
-            $table->integer('user_id')->unsigned();
-            $table->string('social_id');
-
+            $table->foreign('message_id')->references('id')->on('messages');
             $table->foreign('user_id')->references('id')->on('users');
         });
     }
@@ -31,6 +32,6 @@ class CreateSocialProfilesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('social_profiles_tables');
+        Schema::dropIfExists('responses');
     }
 }

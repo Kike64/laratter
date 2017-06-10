@@ -39,6 +39,9 @@ class MessagesController extends Controller
         return view('messages.index', [
             'messages' => $messages
         ]);
+    }
 
+    public function responses(Message $message){
+        return $message->responses;
     }
 }
